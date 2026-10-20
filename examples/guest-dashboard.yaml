@@ -1,0 +1,18 @@
+# Distinct layout using sources from the main lovelace dashboard.
+# Replace entity roles to match your source. This is not a permissions boundary.
+title: Household
+views:
+  - title: Rooms
+    path: rooms
+    cards:
+      - type: custom:dashboard-entity-reference
+        dashboard: lovelace
+        card:
+          type: vertical-stack
+          cards:
+            - type: tile
+              entity: "[[entity:garden_light]]"
+              name: Garden light
+            - type: tile
+              entity: "[[entity:study_light]]"
+              name: Study light

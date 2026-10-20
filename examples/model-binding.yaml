@@ -1,0 +1,14 @@
+# Illustrative floor3dx binding. Requires that custom card and your own model.
+# Merge into the valid model configuration for your installed renderer version.
+type: custom:dashboard-entity-reference
+dashboard: lovelace
+expected_domains:
+  garden_light: light
+card:
+  type: custom:floor3dx-card
+  path: /local/models/
+  objfile: house.glb
+  entities:
+    - entity: "[[entity:garden_light]]"
+      object_id: Garden_Lamp
+      type3d: light

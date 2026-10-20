@@ -1,0 +1,6 @@
+# Use this as the card content expected by your chosen popup implementation.
+# Opening/closing the popup is owned by that separate implementation.
+type: custom:dashboard-card-reference
+dashboard: lovelace
+card_id: garden_controls
+strip_heading: true

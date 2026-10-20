@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1160" height="410" viewBox="0 0 1160 410" role="img" aria-labelledby="title desc">
+<title id="title">Dashboard References</title><desc id="desc">A saved dashboard supplies reusable cards and named entity assignments to dashboard, popup, model and snapshot layouts. Native editors preserve those links.</desc>
+<rect width="1160" height="410" rx="24" fill="#f5f8fc"/>
+<g font-family="system-ui,Segoe UI,sans-serif" fill="#17324e">
+<text x="42" y="60" font-size="30" font-weight="650">One dashboard. Shared controls. Editable components.</text>
+<rect x="42" y="106" width="300" height="205" rx="18" fill="#e4f2ff" stroke="#73b6ed"/>
+<text x="66" y="145" font-size="22" font-weight="600">Saved source dashboard</text>
+<text x="66" y="185" font-size="18">Named cards</text><text x="66" y="218" font-size="18">Named entity assignments</text>
+<text x="66" y="278" font-size="16" fill="#476780">Edit the source once</text>
+<path d="M355 208 H430" stroke="#2196db" stroke-width="4"/><path d="m419 199 13 9-13 9" fill="none" stroke="#2196db" stroke-width="4"/>
+<rect x="448" y="106" width="304" height="92" rx="16" fill="#fff" stroke="#b4c8da"/>
+<text x="469" y="143" font-size="21" font-weight="600">Card Reference</text><text x="469" y="174" font-size="17">Reuse saved content</text>
+<rect x="448" y="219" width="304" height="92" rx="16" fill="#fff" stroke="#b4c8da"/>
+<text x="469" y="256" font-size="21" font-weight="600">Entity Reference</text><text x="469" y="287" font-size="17">Keep a different design</text>
+<path d="M767 152 H813 M767 265 H813" stroke="#2196db" stroke-width="4"/>
+<rect x="834" y="106" width="282" height="205" rx="18" fill="#fff" stroke="#b4c8da"/>
+<text x="857" y="145" font-size="21" font-weight="600">Your other layouts</text>
+<text x="857" y="185" font-size="18">Dashboards and popups</text><text x="857" y="218" font-size="18">Models and snapshots</text><text x="857" y="278" font-size="16" fill="#476780">Native component editors</text>
+<text x="42" y="366" font-size="17" fill="#476780">Frontend plugin · One resource · HACS Dashboard category · No polling</text>
+</g></svg>

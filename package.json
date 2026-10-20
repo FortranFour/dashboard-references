@@ -1,0 +1,14 @@
+{
+  "name": "dashboard-references",
+  "version": "0.1.0-beta.1",
+  "private": true,
+  "description": "Reuse saved Home Assistant cards and named entity assignments, with native component editors.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node tests/browser.mjs",
+    "check": "node --check dist/dashboard-references.js && node scripts/check.mjs"
+  },
+  "devDependencies": { "playwright": "1.62.1" }
+}

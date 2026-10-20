@@ -1,0 +1,25 @@
+name: Bug report
+description: Report a reproducible reference or editor issue.
+body:
+  - type: input
+    id: versions
+    attributes:
+      label: Home Assistant, browser/app, and Dashboard References versions
+    validations:
+      required: true
+  - type: dropdown
+    id: editors
+    attributes:
+      label: Does it occur with editors disabled (?editors=false)?
+      options: ['Yes', 'No', 'Not checked']
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction and minimal YAML
+      description: Include source and consumer configurations. Remove private information and credentials.
+    validations:
+      required: true
+  - type: textarea
+    id: console
+    attributes:
+      label: Relevant browser console errors

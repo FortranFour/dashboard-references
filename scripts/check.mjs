@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+const read = p=>readFile(new URL('../'+p,import.meta.url),'utf8');
+const hacs=JSON.parse(await read('hacs.json'));
+assert.equal(hacs.filename,'dashboard-references.js');
+const code=await read('dist/'+hacs.filename);
+assert(!/counter\.mail_deliveries|1_17|energy_utilities_popup|tabbed-card-programmable|input_button\.floor3d_/.test(code),'Household-specific patch remained');
+for(const name of ['dashboard-card-reference','dashboard-entity-reference','dashboard-reference-native-editor','dashboard-component-editor']) assert(code.includes(name));
+assert((await read('README.md')).includes('![Dashboard References'));
+console.log('Package metadata and generic-source checks passed');

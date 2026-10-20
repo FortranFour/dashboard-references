@@ -1,0 +1,12 @@
+# Original model cards must carry these IDs on the source dashboard:
+#   card_reference_id: house_model
+#   card_reference_id: garage_model
+# Their saved content cannot contain whole-card references.
+type: horizontal-stack
+cards:
+  - type: custom:dashboard-card-reference
+    dashboard: lovelace
+    card_id: house_model
+  - type: custom:dashboard-card-reference
+    dashboard: lovelace
+    card_id: garage_model

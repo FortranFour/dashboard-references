@@ -1,0 +1,40 @@
+# Complete dashboard using only built-in cards plus Dashboard References.
+title: Reference examples
+views:
+  - title: Main
+    path: main
+    cards:
+      - type: entities
+        title: Garden controls
+        card_reference_id: garden_controls
+        entities:
+          - entity: light.garden
+            entity_reference_id: garden_light
+          - entity: switch.fountain
+            entity_reference_id: garden_fountain
+      - type: entities
+        title: Indoor controls
+        card_reference_id: indoor_controls
+        entities:
+          - entity: light.study
+            entity_reference_id: study_light
+  - title: Reuse
+    path: reuse
+    cards:
+      - type: custom:dashboard-card-reference
+        dashboard: lovelace
+        card_ids: [garden_controls, indoor_controls]
+        labels: [Garden, Inside]
+        layout: tabs
+      - type: custom:dashboard-entity-reference
+        dashboard: lovelace
+        expected_domains:
+          garden_light: light
+          garden_fountain: switch
+        card:
+          type: horizontal-stack
+          cards:
+            - type: tile
+              entity: "[[entity:garden_light]]"
+            - type: tile
+              entity: "[[entity:garden_fountain]]"
