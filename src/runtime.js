@@ -3,7 +3,7 @@
   'use strict';
   const ELEMENT_NAME = 'dashboard-card-reference';
   const ENTITY_ELEMENT_NAME = 'dashboard-entity-reference';
-  const VERSION = '0.1.0-beta.2';
+  const VERSION = '0.1.0-beta.3';
   const ENTITY_TOKEN = /\[\[entity:([A-Za-z0-9_.-]+)\]\]/g;
   const ENTITY_ID = /^[a-z_]+\.[a-z0-9_]+$/;
   const REFERENCE_ID = /^[A-Za-z0-9_.-]+$/;
@@ -339,15 +339,26 @@
     return content;
   }
 
-  // Reject nested whole-card references before rendering. This conservative
-  // boundary prevents direct and indirect reference cycles across dashboards.
+  // Reject nested whole-card references in immediately rendered content.
+  // Browser Mod popup contents are deferred until a user action, so they do
+  // not create a rendering cycle merely by existing in a source card.
   function assertNoCardReferences(value) {
     if (Array.isArray(value)) return value.forEach(assertNoCardReferences);
     if (!value || typeof value !== 'object') return;
     if (value.type === 'custom:dashboard-card-reference') {
       throw new Error('Nested whole-card references are not supported. Reference the original content directly.');
     }
-    Object.values(value).forEach(assertNoCardReferences);
+    for (const [key, child] of Object.entries(value)) {
+      if (['tap_action', 'hold_action', 'double_tap_action'].includes(key) &&
+          child?.action === 'fire-dom-event' &&
+          child.browser_mod?.service === 'browser_mod.popup' &&
+          child.browser_mod.data && typeof child.browser_mod.data === 'object') {
+        const { content, ...data } = child.browser_mod.data;
+        assertNoCardReferences({ ...child, browser_mod: { ...child.browser_mod, data } });
+      } else {
+        assertNoCardReferences(child);
+      }
+    }
   }
 
   class ReferenceTabs extends HTMLElement {

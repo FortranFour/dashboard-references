@@ -53,6 +53,26 @@ try {
   await test('Duplicate card IDs are reported',async()=>{reset();f.configs.lovelace=config([source(),source()]);assert((await mount(whole())).shadowRoot.textContent.includes('Duplicate card_reference_id'));});
   await test('Duplicate entity roles are reported',async()=>{reset();f.configs.lovelace.views[0].cards[0].entities.push({entity:'light.second',entity_reference_id:'garden_light'});assert((await mount(entity())).shadowRoot.textContent.includes('Duplicate entity reference'));});
   await test('Nested whole-card references cannot recurse',async()=>{reset();f.configs.lovelace=config([{type:'vertical-stack',card_reference_id:'garden',cards:[whole()]}]);assert((await mount(whole())).shadowRoot.textContent.includes('Nested whole-card references'));});
+  await test('Deferred Browser Mod popup references survive all three actions',async()=>{
+   for(const action of ['tap_action','hold_action','double_tap_action']){
+    reset();const popup={action:'fire-dom-event',browser_mod:{service:'browser_mod.popup',data:{title:'Deferred',content:whole()}}};
+    f.configs.lovelace=config([{...source(),[action]:popup}]);
+    const c=await mount(whole());same(c._card.config[action],popup);
+   }
+  });
+  await test('Entity-reference cards retain deferred popup references',async()=>{
+   reset();const popup={action:'fire-dom-event',browser_mod:{service:'browser_mod.popup',data:{content:whole()}}};
+   const c=await mount(entity({card:{type:'tile',entity:'[[entity:garden_light]]',tap_action:popup}}));
+   same(c._card.config.entity,'light.garden');same(c._card.config.tap_action,popup);
+  });
+  await test('Popup exception does not admit immediately rendered siblings',async()=>{
+   reset();f.configs.lovelace=config([{...source(),cards:[whole()],tap_action:{action:'fire-dom-event',browser_mod:{service:'browser_mod.popup',data:{content:whole()}}}}]);
+   assert((await mount(whole())).shadowRoot.textContent.includes('Nested whole-card references'));
+  });
+  await test('Popup exception requires the recognized deferred action',async()=>{
+   reset();f.configs.lovelace=config([{...source(),tap_action:{action:'none',browser_mod:{service:'browser_mod.popup',data:{content:whole()}}}}]);
+   assert((await mount(whole())).shadowRoot.textContent.includes('Nested whole-card references'));
+  });
   await test('Saved whole card refreshes while mounted',async()=>{reset();const c=await mount(whole());f.configs.lovelace.views[0].cards[0].title='Updated';fire('lovelace');await wait(()=>c._card?.config?.title==='Updated');});
   await test('Saved entity assignment refreshes while mounted',async()=>{reset();const c=await mount(entity());f.configs.lovelace.views[0].cards[0].entities[0].entity='light.replacement';fire('lovelace');await wait(()=>c._card?.config?.entity==='light.replacement');});
   await test('Unchanged save retains child instance',async()=>{reset();const c=await mount(whole()),child=c._card;fire('lovelace');await wait(()=>c._ready);assert(c._card===child);});

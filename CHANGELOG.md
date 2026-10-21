@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.0-beta.3 — 2026-10-20
+
+- Allow deferred whole-card references in Browser Mod popup tap, hold, and double-tap actions while retaining rejection of immediately rendered nested references.
+- Add browser coverage for deferred popup references and recursion boundaries.
+
 ## 0.1.0-beta.2 — 2026-10-20
 
 - Repair the overview PNG and add image-format validation.

@@ -6,7 +6,7 @@
 
 Dashboard References is a Home Assistant **frontend dashboard plugin**, installed through HACS. One JavaScript resource includes two reference cards and two editing helpers. There is no backend integration, additional sensor, scheduled poll, or cloud service.
 
-**Status: 0.1.0-beta.2.** This first community package derives from a working household implementation. Automated Chromium checks use a simulated Home Assistant frontend/API. A live Home Assistant 2026.10 installation, the iOS app, and every third-party card have not been certified. Start on a duplicate dashboard and report compatibility findings.
+**Status: 0.1.0-beta.3.** This first community package derives from a working household implementation. Automated Chromium checks use a simulated Home Assistant frontend/API. A live Home Assistant 2026.10 installation, the iOS app, and every third-party card have not been certified. Start on a duplicate dashboard and report compatibility findings.
 
 ## Two reasons to use Dashboard References
 
@@ -228,7 +228,7 @@ Dashboard reads are shared per connection, concurrent lookups are deduplicated, 
 
 If update subscriptions are unavailable, reads are not retained as a persistent remote cache. Reopening/recreating a reference triggers a fresh read; there is no periodic polling. YAML-file changes may require Home Assistant's normal dashboard reload and a frontend reload. Open editor source maps are refreshed by reopening the editor.
 
-Whole-card references **cannot contain another whole-card reference**, including one nested inside a source stack. This conservative rule prevents reference cycles. Reference original content directly, or build a destination stack of sibling references. Entity wrappers also reject nested whole-card references. Nested source IDs themselves are allowed if each ID is unique.
+Whole-card references **cannot immediately render another whole-card reference**, including one nested inside a source stack. This prevents reference cycles. Reference original content directly, or build a destination stack of sibling references. Entity wrappers apply the same restriction. References in Browser Mod popup content under `tap_action`, `hold_action`, or `double_tap_action` are allowed because they render only when the user opens that popup. Nested source IDs themselves are allowed if each ID is unique.
 
 All underlying custom cards must be installed and their resources loaded. Source metadata on a native card may prevent its ordinary graphical editor from accepting that card directly; Component Editor temporarily removes and then restores supported metadata. Native editors can also reject unknown fields independently.
 
