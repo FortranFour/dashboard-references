@@ -30,5 +30,5 @@ jobs:
             gh release upload "$GITHUB_REF_NAME" dist/dashboard-references.js --clobber
             gh release edit "$GITHUB_REF_NAME" --prerelease=false --latest
           else
-            gh release create "$GITHUB_REF_NAME" dist/dashboard-references.js --title "Dashboard References $GITHUB_REF_NAME" --notes-file docs/RELEASE_NOTES.md --latest
+            gh release create "$GITHUB_REF_NAME" dist/dashboard-references.js --title "$GITHUB_REF_NAME: Dashboard References" --notes-file docs/RELEASE_NOTES.md --latest
           fi
