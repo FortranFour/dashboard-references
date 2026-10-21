@@ -33,4 +33,4 @@ version="$(node -p "JSON.parse(require('fs').readFileSync('package.json','utf8')
 git tag "v$version"
 git push origin "v$version"
 echo "Published repository: https://github.com/$repo"
-echo 'The tag starts the tested GitHub prerelease workflow. Check Actions before announcing the release.'
+echo 'The tag starts the tested GitHub release workflow. Check Actions before announcing the release.'

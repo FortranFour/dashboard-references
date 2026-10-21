@@ -23,10 +23,9 @@ A card may have a perfectly usable native visual editor until it is placed insid
 **The optional editing helpers expose those existing editors without requiring you to dismantle the layout or discard its styling.** Select the inner component, edit the options its native editor supports, and keep the supported surrounding metadata and entity bindings when the component is put back.
 
 - **Component Editor** selects individual cards inside complex configurations and preserves supported styling, layout, visibility, and reference metadata. It also recognizes the saved `element` inside a UIX Forge wrapper. **It is useful even if you use neither reference card.**
-- **Reference Editor** bridges our entity-reference wrappers to the native floor3d-family and snapshot editors. Their controls receive actual entity IDs; accepted edits are converted back into stable source references.
-- **Resolved YAML editing** also shows actual IDs in the card editor, while the saved configuration retains its reference tokens.
+- **Reference-aware editing** shows actual entity IDs while retaining stable source-reference tokens in the saved configuration. **Reference Editor** applies this workflow through adapters for supported native visual editors; **Component Editor** also provides resolved YAML editing in the card editor. These are two ways to edit the same linked configuration, rather than separate reuse features.
 
-For example, you can adjust a tile's name or icon through its native visual editor while retaining its `card_mod` styling, or edit a supported model card without replacing its shared entity references with hard-coded IDs. The helpers expose existing visual controls; CSS, templates, and options the underlying editor does not support may still need YAML. UIX-specific preservation depends on the saved wrapper/configuration and is not a claim that arbitrary generated or templated UIX content has a visual editor.
+For example, you can adjust a tile's name or icon through its native visual editor while retaining its `card_mod` styling, or edit a supported referenced card without replacing its shared entity references with hard-coded IDs. The helpers expose existing visual controls; CSS, templates, and options the underlying editor does not support may still need YAML. UIX-specific preservation depends on the saved wrapper/configuration and is not a claim that arbitrary generated or templated UIX content has a visual editor.
 
 ## What is included?
 
@@ -34,7 +33,7 @@ For example, you can adjust a tile's name or icon through its native visual edit
 | --- | --- |
 | `custom:dashboard-card-reference` | Render the saved configuration of a named source card, including cards in unopened views or another dashboard. |
 | `custom:dashboard-entity-reference` | Keep a different layout while substituting named entity assignments from a source dashboard. |
-| Reference Editor | Open native floor3d-family and floor3d-snapshot visual editors with actual entity IDs, then save stable references. |
+| Reference Editor | Adapt supported native visual editors to entity-reference wrappers: show actual IDs while editing and save stable references. |
 | Component Editor | Select individual cards inside stacks, wrappers, tabs, and popups; retain surrounding layout metadata and styling. Show concrete entity IDs in card YAML editing while preserving reference tokens on save. |
 
 **Reference rendering and editor recovery are independent benefits.** Disable the optional editors if you only need references; use Component Editor on existing customized cards even if you have no reference consumers. A card that has no native visual editor still uses YAML.
@@ -52,7 +51,7 @@ This does not rename entities, modify automations, replace Home Assistant's enti
 Repository: **`FortranFour/dashboard-references`**.
 
 1. In HACS, open **Custom repositories** and enter `https://github.com/FortranFour/dashboard-references`, category **Dashboard**. Older HACS versions may call the category Lovelace/plugin.
-2. Download Dashboard References. For this beta, select the prerelease if HACS does not offer it by default; the default branch also contains the built file.
+2. Download the latest release of Dashboard References. The version name currently includes a beta designation; the default branch also contains the built file.
 3. Check **Settings → Dashboards → Resources**. Keep exactly one resource:
 
    ```yaml
@@ -184,9 +183,8 @@ The editing helpers address a separate maintenance problem: the outer configurat
 
 Open a card's ordinary Home Assistant edit dialog. Component Editor adds a component selector for nested configurations and preserves `card_mod`, source IDs, layout/visibility metadata, and existing entity bindings while editing the selected component.
 
-- A supported wrapped floor3d-family or snapshot card delegates to its existing native editor. The editor sees actual IDs; configuration-change events are mapped back to source roles.
-- For other components, linked bindings are protected. Replace a device at its source entry. A message explains when an attempted component edit is kept linked to the original source.
-- Card YAML editing displays concrete IDs while the saved configuration remains tokenized. This applies to the card editor, **not** the dashboard-wide raw configuration editor or files on disk.
+- **Resolve, edit, retain references.** Supported native visual-editor adapters and resolved card YAML editing both show concrete entity IDs while preserving stable source-reference tokens on save. The dedicated native adapters cover a limited set of card types; resolved YAML editing applies more broadly. The resolved YAML view applies to the card editor, **not** the dashboard-wide raw configuration editor or files on disk.
+- For components without a dedicated reference-aware native adapter, existing linked bindings are protected. Replace a device at its source entry. A message explains when an attempted component edit is kept linked to the original source.
 - Choosing an unregistered entity in a referenced configuration produces a missing-source error. Add a unique role on the source dashboard, save, and reopen the editor.
 - Whole-card references offer **Edit source**. Direct source saving is limited to the currently open dashboard in storage mode, uses a separate **Save source card** button, and checks whether the original source changed. Cross-dashboard source edits direct you to the source dashboard. YAML-mode sources must be saved in their YAML files.
 
@@ -201,7 +199,7 @@ The editing helpers do not give every third-party configuration a graphical edit
 5. **Recover a styled card’s visual editor.** A tile with `card_mod` or other preserved metadata may fall back to YAML in the ordinary editor. Edit the inner tile’s supported options visually while keeping its styling.
 6. **Edit a deeply nested or UIX-wrapped card.** Select a tile inside a stack or a saved Forge `element`, use its existing visual editor, and retain the surrounding wrapper. This use case requires no reference cards.
 
-See [complete dashboard example](examples/dashboard.yaml), [cross-dashboard consumer](examples/guest-dashboard.yaml), [3D binding](examples/model-binding.yaml), and [shared popup content](examples/popup-content.yaml).
+See [complete dashboard example](examples/dashboard.yaml), [cross-dashboard consumer](examples/guest-dashboard.yaml), [shared entity bindings](examples/model-binding.yaml), and [shared popup content](examples/popup-content.yaml).
 
 ## Comparison with UIX and related packages
 
@@ -252,6 +250,6 @@ npm test
 
 For an unpublished checkout, `bash scripts/publish.sh` creates the new public `FortranFour/dashboard-references` repository using an authenticated GitHub CLI, sets topics, and pushes the version tag. It refuses an existing repository or origin remote.
 
-GitHub Actions run build verification, browser checks, and HACS validation (`category: plugin`). Version tags matching `package.json` publish the built file as a GitHub prerelease after the release-job checks pass. This beta workflow deliberately marks releases as prereleases.
+GitHub Actions run build verification, browser checks, and HACS validation (`category: plugin`). Version tags matching `package.json` publish the built file as a GitHub release marked **Latest** after the release-job checks pass, so the version appears in the repository sidebar. The beta designation in the version name describes the package's current maturity; it is retained even though the release is published through GitHub's regular release channel.
 
 [MIT license](LICENSE). Originally developed for FortranFour's Home Assistant dashboards. UIX, Home Assistant, and the referenced custom-card projects are independent projects; this package does not bundle their code or imply their endorsement.
