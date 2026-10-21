@@ -3,7 +3,7 @@
   'use strict';
   const ELEMENT_NAME = 'dashboard-card-reference';
   const ENTITY_ELEMENT_NAME = 'dashboard-entity-reference';
-  const VERSION = '0.1.0-beta.1';
+  const VERSION = '0.1.0-beta.2';
   const ENTITY_TOKEN = /\[\[entity:([A-Za-z0-9_.-]+)\]\]/g;
   const ENTITY_ID = /^[a-z_]+\.[a-z0-9_]+$/;
   const REFERENCE_ID = /^[A-Za-z0-9_.-]+$/;

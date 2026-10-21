@@ -1,6 +1,6 @@
 {
   "name": "dashboard-references",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.2",
   "private": true,
   "description": "Reuse saved Home Assistant cards and named entity assignments, with native component editors.",
   "license": "MIT",

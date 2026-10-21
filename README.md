@@ -6,7 +6,7 @@
 
 Dashboard References is a Home Assistant **frontend dashboard plugin**, installed through HACS. One JavaScript resource includes two reference cards and two editing helpers. There is no backend integration, additional sensor, scheduled poll, or cloud service.
 
-**Status: 0.1.0-beta.1.** This first community package derives from a working household implementation. Automated Chromium checks use a simulated Home Assistant frontend/API. A live Home Assistant 2026.10 installation, the iOS app, and every third-party card have not been certified. Start on a duplicate dashboard and report compatibility findings.
+**Status: 0.1.0-beta.2.** This first community package derives from a working household implementation. Automated Chromium checks use a simulated Home Assistant frontend/API. A live Home Assistant 2026.10 installation, the iOS app, and every third-party card have not been certified. Start on a duplicate dashboard and report compatibility findings.
 
 ## Two reasons to use Dashboard References
 

@@ -1,13 +1,12 @@
-First community beta combining dashboard card reuse, shared named entity assignments, and the two native editing helpers in one HACS dashboard plugin.
+Dashboard References 0.1.0-beta.2
 
-- Existing reference card types and source metadata retained.
-- One bundled resource; optional editor-disable URL flags.
-- Explicit source-dashboard lookup and save/reconnect refresh.
-- Built-in keyboard-accessible tabs and native vertical/horizontal stacks.
-- Generic behavior: no household IDs, mail-model patch, or special utilities composition.
-- README leads with the ordinary dashboard as the authoritative source and recovery of existing native editors inside styled/wrapped configurations.
-- Configuration reference, migration notes, related-package comparison, complete examples, MIT license, browser regression checks, and HACS/release workflows.
+- Fixed the corrupted overview PNG and added PNG validation.
+- Wrapped the source-dashboard heading inside its blue box.
+- Added “Visual editor restored for complex/nested YAML” to the diagram footer.
+- Included the README emphasis on an ordinary dashboard as the authoritative source and native visual-editor recovery for customized/nested cards.
 
-This is a beta. Automated browser tests use a simulated Home Assistant frontend/API; live HA, actual 3D scenes, mobile apps, and all third-party card versions have not been certified. The component/YAML adapter uses HA frontend internals and can be disabled independently.
+The bundle still contains both reference cards and both optional editing helpers. Reference rendering and editing behavior are unchanged from beta.1.
 
-Install through HACS as a custom Dashboard repository. Default HACS catalog inclusion is a separate review.
+Install through HACS as a custom Dashboard repository: FortranFour/dashboard-references. Replace the three legacy local resource registrations with the single bundled resource as described in the migration guide.
+
+Automated browser checks simulate Home Assistant’s frontend/API; live HA, 3D scenes, and mobile-app compatibility have not been certified. Default HACS catalog listing is a separate review.

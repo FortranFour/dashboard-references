@@ -1,9 +1,9 @@
-/* Dashboard References 0.1.0-beta.1 | MIT License | FortranFour */
+/* Dashboard References 0.1.0-beta.2 | MIT License | FortranFour */
 if (window.DashboardReferences || customElements.get('dashboard-card-reference') || customElements.get('dashboard-entity-reference') || customElements.get('dashboard-reference-native-editor') || window.DashboardComponentEditor) {
   console.warn('Dashboard References: another copy or a legacy resource is already loaded. Remove duplicate resources and reload.');
 } else {
   const params = new URL(import.meta.url).searchParams;
-  window.DashboardReferences = Object.freeze({version: '0.1.0-beta.1', options: Object.freeze({
+  window.DashboardReferences = Object.freeze({version: '0.1.0-beta.2', options: Object.freeze({
     editors: params.get('editors') !== 'false', component_editor: params.get('component_editor') !== 'false'
   })});
 /* Dashboard References runtime. MIT License. */
@@ -11,7 +11,7 @@ if (window.DashboardReferences || customElements.get('dashboard-card-reference')
   'use strict';
   const ELEMENT_NAME = 'dashboard-card-reference';
   const ENTITY_ELEMENT_NAME = 'dashboard-entity-reference';
-  const VERSION = '0.1.0-beta.1';
+  const VERSION = '0.1.0-beta.2';
   const ENTITY_TOKEN = /\[\[entity:([A-Za-z0-9_.-]+)\]\]/g;
   const ENTITY_ID = /^[a-z_]+\.[a-z0-9_]+$/;
   const REFERENCE_ID = /^[A-Za-z0-9_.-]+$/;
